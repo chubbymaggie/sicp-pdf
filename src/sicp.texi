@@ -4,8 +4,8 @@
 @settitle            Structure and Interpretation of Computer Programs, 2e
 @comment             Unofficial Texinfo Format
 @comment
-@set utfversion      2.andresraba5.5
-@set utfversiondate  September 15, 2015
+@set utfversion      2.andresraba5.6
+@set utfversiondate  February 2, 2016
 @comment
 @comment             This file is licensed under a Creative Commons
 @comment             Attribution-ShareAlike 4.0 International License
@@ -75,6 +75,10 @@
 @comment * Version 2.andresraba5.5 (September 15, 2015) by Andres Raba.
 @comment   Updated license to CC BY-SA 4.0. Redesigned title page.
 @comment   Tinted chapter and section numbers. Fixed broken links.
+@comment
+@comment * Version 2.andresraba5.6 (February 2, 2016) by Andres Raba.
+@comment   Improved microtypography in code listings. Removed manual
+@comment   word breaks. Fixed broken links.
 @comment
 
 
@@ -1456,7 +1460,7 @@ general kind of process known as @newterm{tree accumulation}.
 @sp 0.2
 @center @image{fig/chap1/Fig1.1g,31mm,,,.pdf}
 @sp 0.4
-@strong{Figure 1.1:} Tree representation, showing the value of each subcombination.
+@caption{@strong{Figure 1.1:} Tree representation, showing the value of each subcombination.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -1841,10 +1845,12 @@ actions in the different cases according to the rule
 
 @end ifinfo
 @tex
+$$
  |x| = \left\{ \begin{array}{r@{\quad \mathrm{if} \quad}l}
         x  &  x > 0, \\
 	0  &  x = 0, \\
   \!\! -x  &  x < 0. \end{array} \right.
+$$
 @end tex
 This construct is called a @newterm{case analysis}, and there is a special form
 in Lisp for notating such a case analysis.  It is called @code{cond} (which
@@ -1861,10 +1867,10 @@ stands for ``conditional''), and it is used as follows:
 The general form of a conditional expression is
 
 @lisp
-(cond (@math{\langle{p_1}\kern0.08em\rangle} @math{\langle{e_1}\kern0.08em\rangle})
-      (@math{\langle{p_2}\kern0.08em\rangle} @math{\langle{e_2}\kern0.08em\rangle})
+(cond (@math{\langle}@var{p}@math{_{\mono{1}}\rangle} @math{\langle}@var{e}@math{_{\mono{1}}\rangle})
+      (@math{\langle}@var{p}@math{_{\mono{2}}\rangle} @math{\langle}@var{e}@math{_{\mono{2}}\rangle})
       @dots{}
-      (@math{\langle{p_n}\kern0.08em\rangle} @math{\langle{e_n}\kern0.08em\rangle}))
+      (@math{\langle}@var{p}@math{_{\monoit{n}}\rangle} @math{\langle}@var{e}@math{_{\monoit{n}}\rangle}))
 @end lisp
 
 @noindent
@@ -1872,7 +1878,7 @@ consisting of the symbol @code{cond} followed by parenthesized pairs of
 expressions
 
 @lisp
-(@math{\langle{p}\kern0.08em\rangle} @math{\langle{e}\kern0.08em\rangle})
+(@math{\langle}@var{p}@math{\rangle} @math{\langle}@var{e}@math{\rangle})
 @end lisp
 
 @noindent
@@ -1941,15 +1947,15 @@ form of an @code{if} expression is
 
 @noindent
 To evaluate an @code{if} expression, the interpreter starts by evaluating the
-@math{\langle}@var{predicate}@math{\kern0.08em\rangle} part of the expression.  If the @math{\langle}@var{predicate}@math{\kern0.08em\rangle} evaluates
-to a true value, the interpreter then evaluates the @math{\langle}@var{consequent}@math{\kern0.08em\rangle} and
-returns its value.  Otherwise it evaluates the @math{\langle}@var{alternative}@math{\kern0.08em\rangle} and returns
+@math{\langle}@var{predicate}@math{\kern0.04em\rangle} part of the expression.  If the @math{\langle}@var{predicate}@math{\kern0.04em\rangle} evaluates
+to a true value, the interpreter then evaluates the @math{\langle}@var{consequent}@math{\kern0.04em\rangle} and
+returns its value.  Otherwise it evaluates the @math{\langle}@var{alternative}@math{\kern0.04em\rangle} and returns
 its value.@footnote{A minor difference between @code{if} and @code{cond} is
-that the @math{\langle{e}\kern0.08em\rangle} part of each @code{cond} clause may be a sequence of
-expressions.  If the corresponding @math{\langle{p}\kern0.08em\rangle} is found to be true, the
-expressions @math{\langle{e}\kern0.08em\rangle} are evaluated in sequence and the value of the final
+that the @math{\langle{e}\rangle} part of each @code{cond} clause may be a sequence of
+expressions.  If the corresponding @math{\langle{p}\rangle} is found to be true, the
+expressions @math{\langle{e}\rangle} are evaluated in sequence and the value of the final
 expression in the sequence is returned as the value of the @code{cond}.  In an
-@code{if} expression, however, the @math{\langle}@var{consequent}@math{\kern0.08em\rangle} and @math{\langle}@var{alternative}@math{\kern0.08em\rangle}
+@code{if} expression, however, the @math{\langle}@var{consequent}@math{\kern0.04em\rangle} and @math{\langle}@var{alternative}@math{\kern0.04em\rangle}
 must be single expressions.}
 
 In addition to primitive predicates such as @code{<}, @code{=}, and @code{>},
@@ -2401,7 +2407,7 @@ problem into subproblems.
 @sp 0.5
 @center @image{fig/chap1/Fig1.2,44mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 1.2:} Procedural decomposition of the @code{sqrt} program.
+@center @caption{@strong{Figure 1.2:} Procedural decomposition of the @code{sqrt} program.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -2722,7 +2728,7 @@ procedure in action computing 6!, as shown in @ref{Figure 1.3}.
 @sp 0.4
 @center @image{fig/chap1/Fig1.3c,82mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 1.3:} A linear recursive process for computing 6!.
+@center @caption{@strong{Figure 1.3:} A linear recursive process for computing 6!.}
 @sp 1.0
 @end iftex
 @end quotation
@@ -2769,7 +2775,7 @@ exceeds @math{n}.
 @sp 0.4
 @center @image{fig/chap1/Fig1.4c,36mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 1.4:} A linear iterative process for computing 6!.
+@center @caption{@strong{Figure 1.4:} A linear iterative process for computing 6!.}
 @sp 1.0
 @end iftex
 @end quotation
@@ -3063,7 +3069,7 @@ V     /  . \   . 1  .  . 1  .  . 0  .  . 1  .  . 0  ..
 @sp 0.3
 @center @image{fig/chap1/Fig1.5c,90mm,,,.pdf}
 @sp 0.5
-@strong{Figure 1.5:} The tree-recursive process generated in computing @code{(fib 5)}.
+@caption{@strong{Figure 1.5:} The tree-recursive process generated in computing @code{(fib 5)}.}
 @sp 0.0
 @end iftex
 @end quotation
@@ -3090,10 +3096,12 @@ b <- a
 
 @end ifinfo
 @tex
+$$
 \begin{array}{l@{\;\;\gets\;\;}l}
   a & a + b, \\
   b & a.
 \end{array}
+$$
 @end tex
 @noindent
 It is not hard to show that, after applying this transformation @math{n} times,
@@ -3243,11 +3251,13 @@ linearly with the input.  See @ref{Exercise 3.27}.}
 @strong{@anchor{Exercise 1.11}Exercise 1.11:} A function @math{f} is defined by
 the rule that
 @tex
+$$
 f(n) =
 \begin{cases}
 \;\; n \quad \text{if \; \( n < 3 \),} \\
 \;\; f(n-1) + 2\kern-0.08em f(n-2) + 3\kern-0.08em f(n-3) \quad \text{if \; \( n \ge 3 \).}
 \end{cases}
+$$
 @end tex
 Write a procedure that computes @math{f} by means of a recursive process.  Write a procedure that
 computes @math{f} by means of an iterative process.
@@ -3422,12 +3432,12 @@ b^0 = 1
 
 @end ifinfo
 @tex
-% $$\eqalign{b^n &= b\cdot b^{n-1}, \cr
-% b^0 &= 1, \cr} $$
+$$
 \begin{array}{l@{{}={}}l}
   b^n & b\cdot b^{n-1}, \\
   b^0 & 1,
 \end{array}
+$$
 @end tex
 which translates readily into the procedure
 
@@ -3480,14 +3490,13 @@ b^8 = b^4 * b^4
 
 @end ifinfo
 @tex
-% $$\eqalign{	b^2 &= b\cdot b, \cr
-%		b^4 &= b^2\cdot b^2, \cr
-%		b^8 &= b^4\cdot b^4. \cr} $$
+$$
 \begin{array}{l@{{}={}}l}
   b^2 & b\cdot b, \\
   b^4 & b^2\cdot b^2, \\
   b^8 & b^4\cdot b^4.
 \end{array}
+$$
 @end tex
 This method works fine for exponents that are powers of 2.  We can also take
 advantage of successive squaring in computing exponentials in general if we use
@@ -3501,12 +3510,12 @@ b^n = b * b^(n - 1)  if n is odd
 
 @end ifinfo
 @tex
-% $$\eqalign{b^n &= (b^{n / 2})^2 \qquad \;\, {\rm if\;} n {\rm\; is\; even}, \cr
-% b^n &= b\cdot b^{n-1} \qquad {\rm if\;} n {\rm\; is\; odd}. \cr} $$
+$$
 \begin{array}{l@{{}={}}lr@{\ n\ }l}
   b^n & (b^{n / 2})^2  \;\; & \mbox{if\,} & \mbox{\,is\, even}, \\
   b^n & b\cdot b^{n-1} \;\; & \mbox{if\,} & \mbox{\,is\, odd}.
 \end{array}
+$$
 @end tex
 We can express this method as a procedure:
 
@@ -4637,14 +4646,13 @@ f(x,y) = xa^2 + yb + ab
 
 @end ifinfo
 @tex
-% $$\eqalign{	a 	&= 1 + xy, \cr
-% 		b 	&= 1 - y,  \cr
-% 		f(x,y) 	&= xa^2 + yb + ab. \cr}$$
+$$
 \begin{array}{r@{{}={}}l}
   a 	  &  1 + xy, \\
   b 	  &  1 - y,  \\
   f(x,y)  &  xa^2 + yb + ab.
 \end{array}
+$$
 @end tex
 In writing a procedure to compute @math{f}, we would like to include as local
 variables not only @math{x} and @math{y} but also the names of intermediate
@@ -4694,10 +4702,10 @@ be written as
 The general form of a @code{let} expression is
 
 @lisp
-(let ((@math{\langle}@math{var_1}@math{\rangle} @math{\langle}@math{exp_1}@math{\rangle})
-      (@math{\langle}@math{var_2}@math{\rangle} @math{\langle}@math{exp_2}@math{\rangle})
+(let ((@math{\langle}@var{var}@math{_{\mono{1}}\rangle} @math{\langle}@var{exp}@math{_{\mono{1}}\rangle})
+      (@math{\langle}@var{var}@math{_{\mono{2}}\rangle} @math{\langle}@var{exp}@math{_{\mono{2}}\rangle})
       @dots{}
-      (@math{\langle}@math{var_n}@math{\rangle} @math{\langle}@math{exp_n}@math{\rangle}))
+      (@math{\langle}@var{var}@math{_{\monoit{n}}\rangle} @math{\langle}@var{exp}@math{_{\monoit{n}}\rangle}))
    @math{\langle}@var{body}@math{\rangle})
 @end lisp
 
@@ -4705,11 +4713,11 @@ The general form of a @code{let} expression is
 which can be thought of as saying
 
 @lisp
-let @math{\langle}@math{var_1}@math{\rangle} have the value @math{\langle}@math{exp_1}@math{\rangle} and
-    @math{\langle}@math{var_2}@math{\rangle} have the value @math{\langle}@math{exp_2}@math{\rangle} and
+@w{let} @math{\langle}@var{var}@math{_{\mono{1}}\rangle} @w{have the value} @math{\langle}@var{exp}@math{_{\mono{1}}\rangle} @w{and}
+    @math{\langle}@var{var}@math{_{\mono{2}}\rangle} @w{have the value} @math{\langle}@var{exp}@math{_{\mono{2}}\rangle} @w{and}
     @dots{}
-    @math{\langle}@math{var_n}@math{\rangle} have the value @math{\langle}@math{exp_n}@math{\rangle}
-in  @math{\langle}@var{body}@math{\rangle}
+    @math{\langle}@var{var}@math{_{\monoit{n}}\rangle} @w{have the value} @math{\langle}@var{exp}@math{_{\monoit{n}}\rangle}
+@w{in}  @math{\langle}@var{body}@math{\rangle}
 @end lisp
 
 @noindent
@@ -4720,11 +4728,11 @@ names bound as local variables.  The way this happens is that the @code{let}
 expression is interpreted as an alternate syntax for
 
 @lisp
-((lambda (@math{\langle}@math{var_1}@math{\rangle} @dots{} @math{\langle}@math{var_n}@math{\rangle})
+((lambda (@math{\langle}@var{var}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{var}@math{_{\monoit{n}}\rangle})
     @math{\langle}@var{body}@math{\rangle})
- @math{\langle}@math{exp_1}@math{\rangle}
+ @math{\langle}@var{exp}@math{_{\mono{1}}\rangle}
  @dots{}
- @math{\langle}@math{exp_n}@math{\rangle})
+ @math{\langle}@var{exp}@math{_{\monoit{n}}\rangle})
 @end lisp
 
 @noindent
@@ -5778,16 +5786,16 @@ available as procedures:
 @itemize @bullet
 
 @item
-@math{\hbox{\tt(make-rat}\;\langle{n}\kern0.08em\rangle\;\langle{d}\kern0.06em\rangle\hbox{\tt)}} returns the rational number whose numerator is the integer @math{\langle{n}\kern0.08em\rangle} and whose denominator is the integer
+@math{\hbox{\tt(make-rat}\;\langle{n}\rangle\;\langle{d}\kern0.06em\rangle\hbox{\tt)}} returns the rational number whose numerator is the integer @math{\langle{n}\rangle} and whose denominator is the integer
 @math{\langle{d}\kern0.06em\rangle}.
 
 @item
-@math{\hbox{\tt(numer}\;\;\langle{x}\kern0.08em\rangle\hbox{\tt)}} returns the numerator of the rational number
-@math{\langle{x}\kern0.08em\rangle}.
+@math{\hbox{\tt(numer}\;\;\langle{x}\rangle\hbox{\tt)}} returns the numerator of the rational number
+@math{\langle{x}\rangle}.
 
 @item
-@math{\hbox{\tt(denom}\;\;\langle{x}\kern0.08em\rangle\hbox{\tt)}} returns the denominator of the rational number
-@math{\langle{x}\kern0.08em\rangle}.
+@math{\hbox{\tt(denom}\;\;\langle{x}\rangle\hbox{\tt)}} returns the denominator of the rational number
+@math{\langle{x}\rangle}.
 
 @end itemize
 
@@ -6053,7 +6061,7 @@ manipulating the data.
 @sp 0.5
 @center @image{fig/chap2/Fig2.1c,91mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.1:} Data-abstraction barriers in the rational-number package.
+@center @caption{@strong{Figure 2.1:} Data-abstraction barriers in the rational-number package.}
 @sp 0.6
 @end iftex
 @end float
@@ -6603,7 +6611,7 @@ numbers 1, 2, 3, and 4.
 @sp 0.3
 @center @image{fig/chap2/Fig2.2c,34mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 2.2:} Box-and-pointer representation of @code{(cons 1 2)}.
+@center @caption{@strong{Figure 2.2:} Box-and-pointer representation of @code{(cons 1 2)}.}
 @sp 1
 @end iftex
 @end quotation
@@ -6639,7 +6647,7 @@ numbers 1, 2, 3, and 4.
 @sp 0.3
 @center @image{fig/chap2/Fig2.3c,96mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 2.3:} Two ways to combine 1, 2, 3, and 4 using pairs.
+@center @caption{@strong{Figure 2.3:} Two ways to combine 1, 2, 3, and 4 using pairs.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -6734,7 +6742,7 @@ nested @code{cons} operations:
 @sp 0.2
 @center @image{fig/chap2/Fig2.4c,76mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.4:} The sequence 1, 2, 3, 4 represented as a chain of pairs.
+@center @caption{@strong{Figure 2.4:} The sequence 1, 2, 3, 4 represented as a chain of pairs.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -6749,17 +6757,17 @@ just to lists.}  The above sequence could be produced by @code{(list 1 2 3 4)}.
 In general,
 
 @lisp
-(list @math{\langle}@math{a_1}@math{\rangle} @math{\langle}@math{a_2}@math{\rangle} @dots{} @math{\langle}@math{a_n}@math{\rangle})
+(list @math{\langle}@var{a}@math{_{\mono{1}}\rangle} @math{\langle}@var{a}@math{_{\mono{2}}\rangle} @dots{} @math{\langle}@var{a}@math{_{\monoit{n}}\rangle})
 @end lisp
 
 @noindent
 is equivalent to
 
 @lisp
-(cons @math{\langle}@math{a_1}@math{\rangle}
-      (cons @math{\langle}@math{a_2}@math{\rangle}
+(cons @math{\langle}@var{a}@math{_{\mono{1}}\rangle}
+      (cons @math{\langle}@var{a}@math{_{\mono{2}}\rangle}
             (cons @dots{}
-                  (cons @math{\langle}@math{a_n}@math{\rangle}
+                  (cons @math{\langle}@var{a}@math{_{\monoit{n}}\rangle}
                         nil)@dots{})))
 @end lisp
 
@@ -6789,7 +6797,7 @@ applications of @code{car} and @code{cdr} are cumbersome to write, Lisp
 dialects provide abbreviations for them---for instance,
 
 @lisp
-(cadr @math{\langle}@math{ar\!g}@math{\rangle}) = (car (cdr @math{\langle}@math{ar\!g}@math{\rangle}))
+(cadr @math{\langle}@var{arg}@math{\rangle}) = (car (cdr @math{\langle}@var{arg}@math{\rangle}))
 @end lisp
 
 The names of all such procedures start with @code{c} and end with @code{r}.
@@ -7010,7 +7018,7 @@ follows:
 @end lisp
 
 Define the procedures @code{first-denomination},
-@code{except-first-de- nomination}, and @code{no-more?} in terms of primitive
+@code{except-first-denomination}, and @code{no-more?} in terms of primitive
 operations on list structures.  Does the order of the list @code{coin-values}
 affect the answer produced by @code{cc}?  Why or why not?
 @end quotation
@@ -7283,7 +7291,7 @@ this structure in terms of pairs.
 @sp 0.2
 @center @image{fig/chap2/Fig2.5c,91mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.5:} Structure formed by @code{(cons (list 1 2) (list 3 4))}.
+@center @caption{@strong{Figure 2.5:} Structure formed by @code{(cons (list 1 2) (list 3 4))}.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -7313,7 +7321,7 @@ shows @w{the structure} in @ref{Figure 2.5} viewed as a tree.
 @sp 0.2
 @center @image{fig/chap2/Fig2.6a,22mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.6:} The list structure in @ref{Figure 2.5} viewed as a tree.
+@center @caption{@strong{Figure 2.6:} The list structure in @ref{Figure 2.5} viewed as a tree.}
 @sp 0.0
 @end iftex
 @end quotation
@@ -7723,7 +7731,7 @@ the commonality between the two programs.
 @c 187mm
 @sp 0.4
 @quotation
-@strong{Figure 2.7:} The signal-flow plans for the procedures @code{sum-@/odd-@/squares} (top) and @code{even-fibs} (bottom) reveal the commonality between the two programs.
+@caption{@strong{Figure 2.7:} The signal-flow plans for the procedures @code{sum-@/odd-@/squares} (top) and @code{even-fibs} (bottom) reveal the commonality between the two programs.}
 @end quotation
 @sp 0.7
 @end iftex
@@ -8061,10 +8069,7 @@ matrix).  For example, the matrix
 
 @end ifinfo
 @tex
-% $$
-% \left(\matrix{	1 & 2 & 3 & 4 \cr
-% 		4 & 5 & 6 & 6 \cr
-% 		6 & 7 & 8 & 9 \cr }\right) $$
+$$
 \left(
 \begin{array}{cccc}
   1 & 2 & 3 & 4 \\
@@ -8072,6 +8077,7 @@ matrix).  For example, the matrix
   6 & 7 & 8 & 9
 \end{array}
 \right)
+$$
 @end tex
 @noindent
 is represented as the sequence @code{((1 2 3 4) (4 5 6 6) (6 7 8 9))}.  With
@@ -8098,6 +8104,7 @@ any book on matrix algebra) are the following:
 
 @end ifinfo
 @tex
+$$
 \begin{array}{rl}
 	\hbox{\tt (dot-product v w)} 		& {\rm returns\;the\;sum\;} \Sigma_i v_i w_i; \\
 	\hbox{\tt (matrix-*-vector m v)} 	& {\rm returns\;the\;vector\;} \hbox{\bf t},  \\
@@ -8107,6 +8114,7 @@ any book on matrix algebra) are the following:
 	\hbox{\tt (transpose m)} 		& {\rm returns\;the\;matrix\;} \hbox{\bf n},  \\
 		& {\rm where\;} n_{i\!j} = m_{\kern-0.1em ji}.
 \end{array}
+$$
 @end tex
 We can define the dot product as@footnote{This definition uses the extended
 version of @code{map} described in @ref{Footnote 12}.}
@@ -8385,7 +8393,7 @@ produce not only one solution, but all solutions to the puzzle.
 @sp 0.0
 @center @image{fig/chap2/Fig2.8c,48mm,,,.pdf}      @c 73mm
 @sp 0.3
-@center @strong{Figure 2.8:} A solution to the eight-queens puzzle.
+@center @caption{@strong{Figure 2.8:} A solution to the eight-queens puzzle.}
 @sp 0.0
 @end iftex
 @end float
@@ -8487,7 +8495,7 @@ framework here.
 @sp 0.2
 @center @image{fig/chap2/Fig2.9-bigger,111mm,48mm,,.png}
 @sp 0.6
-@center @strong{Figure 2.9:} Designs generated with the picture language.
+@center @caption{@strong{Figure 2.9:} Designs generated with the picture language.}
 @sp 0.6
 @end iftex
 @end float
@@ -8506,7 +8514,7 @@ lines, are not part of the images.
 @sp 0.5
 @center @image{fig/chap2/Fig2.10,50mm,,,.pdf}
 @sp 0.6
-@strong{Figure 2.10:} Images produced by the @code{wave} painter, with respect to four different frames.  The frames, shown with dotted lines, are not part of the images.
+@caption{@strong{Figure 2.10:} Images produced by the @code{wave} painter, with respect to four different frames.  The frames, shown with dotted lines, are not part of the images.}
 @sp 0.0
 @end iftex
 @end quotation
@@ -8591,7 +8599,7 @@ permission of the @acronym{MIT} Museum).
 @sp 0.2
 @center @image{fig/chap2/Fig2.11,48mm,,,.pdf}
 @sp 0.4
-@strong{Figure 2.11:} Images of William Barton Rogers, founder and first president of @acronym{MIT}, painted with respect to the same four frames as in @ref{Figure 2.10} (original image from Wikimedia Commons).
+@caption{@strong{Figure 2.11:} Images of William Barton Rogers, founder and first president of @acronym{MIT}, painted with respect to the same four frames as in @ref{Figure 2.10} (original image from Wikimedia Commons).}
 @sp 0.8
 @end iftex
 @end quotation
@@ -8634,7 +8642,7 @@ from the @code{wave} painter of @ref{Figure 2.10}.
 @sp 0.3
 @center @image{fig/chap2/Fig2.12,50mm,,,.pdf}
 @sp 0.4
-@strong{Figure 2.12:} Creating a complex figure, starting from the @code{wave} painter of @ref{Figure 2.10}.
+@caption{@strong{Figure 2.12:} Creating a complex figure, starting from the @code{wave} painter of @ref{Figure 2.10}.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -8698,7 +8706,7 @@ and define @code{wave4} as an instance of this pattern:
 @sp 0.7
 @center @image{fig/chap2/Fig2.13a,111mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.13:} Recursive plans for @code{right-split} and @code{corner-split}. @short
+@center @caption{@strong{Figure 2.13:} Recursive plans for @code{right-split} and @code{corner-split}. }@short
 @sp 0.7
 @end iftex
 @end float
@@ -8774,7 +8782,7 @@ pattern called @code{square-limit}, whose application to @code{wave} and
 @sp 0.2
 @center @image{fig/chap2/Fig2.14b,91mm,,,.pdf}
 @sp 0.4
-@strong{Figure 2.14:} The recursive operations @code{right-split} and @code{corner-@/split} applied to the painters @code{wave} and @code{rogers}.  Combining four @code{corner-split} figures produces symmetric @code{square-limit} designs as shown in @ref{Figure 2.9}.
+@caption{@strong{Figure 2.14:} The recursive operations @code{right-split} and @code{corner-@/split} applied to the painters @code{wave} and @code{rogers}.  Combining four @code{corner-split} figures produces symmetric @code{square-limit} designs as shown in @ref{Figure 2.9}.}
 @sp 0.0
 @end iftex
 @end quotation
@@ -8896,7 +8904,7 @@ vector    \    __--        edge1
 @sp 0.2
 @center @image{fig/chap2/Fig2.15a,51mm,,,.pdf}
 @sp 0.2
-@strong{Figure 2.15:} A frame is described by three vectors --- an origin and two edges.
+@caption{@strong{Figure 2.15:} A frame is described by three vectors --- an origin and two edges.}
 @sp 0.6
 @end iftex
 @end quotation
@@ -8970,17 +8978,13 @@ subtraction, and multiplying a vector by a scalar:
 @end example
 @end ifinfo
 @tex
-% $$
-% \eqalign{
-% 	(x_1, y_1) + (x_2, y_2) 	&= (x_1 + x_2, y_1 + y_2), \cr
-% 	(x_1, y_1) - (x_2, y_2) 	&= (x_1 - x_2, y_1 - y_2), \cr
-% 	s \cdot (x, y) 			&= (sx, sy). \cr }
-% $$
+$$
 \begin{array}{r@{{}={}}l}
 	(x_1, y_1) + (x_2, y_2) 	& (x_1 + x_2, y_1 + y_2), \\
 	(x_1, y_1) - (x_2, y_2) 	& (x_1 - x_2, y_1 - y_2), \\
 	s \cdot (x, y) 			& (sx, sy).
 \end{array}
+$$
 @end tex
 @end quotation
 
@@ -9550,17 +9554,25 @@ d(uv)     / dv \     / du \
 
 @end ifinfo
 @tex
+$$
 {{\it dc} \over {\it dx}} 		= 0,
 	\quad {\rm for\ } c\ {\rm a\ constant\ or\ a\ variable\ different\ from\ } x,
+$$
 @end tex
 @tex
+$$
 {{\it dx} \over {\it dx}} 		= 1,
+$$
 @end tex
 @tex
+$$
 {{\it d\,(u + v\,)} \over {\it dx}} 	= {{\it du} \over {\it dx}} + {{\it dv} \over {\it dx}},
+$$
 @end tex
 @tex
+$$
 {{\it d\,(uv\,)} \over {\it dx}} 	= u {{\it dv} \over {\it dx}} + v {{\it du} \over {\it dx}}.
+$$
 @end tex
 @noindent
 Observe that the latter two rules are recursive in nature.  That is, to obtain
@@ -10112,7 +10124,7 @@ elements in the right subtree be larger.
 @center @image{fig/chap2/Fig2.16b,70mm,,,.pdf}
 @sp 0.2
 @quotation
-@strong{Figure 2.16:} Various binary trees that represent the set @math{\{1, 3, 5, 7, 9, 11\}}.
+@caption{@strong{Figure 2.16:} Various binary trees that represent the set @math{\{1, 3, 5, 7, 9, 11\}}.}
 @end quotation
 @sp 0.5
 @end iftex
@@ -10239,7 +10251,7 @@ devoted to this problem.  See @ref{Cormen et al. 1990}.}
 @sp -1.0
 @center @image{fig/chap2/Fig2.17a,40mm,,,.pdf}
 @sp 0.2
-@strong{Figure 2.17:} Unbalanced tree produced by adjoining 1 through 7 in sequence.
+@caption{@strong{Figure 2.17:} Unbalanced tree produced by adjoining 1 through 7 in sequence.}
 @sp 0.0
 @end iftex
 @end quotation
@@ -10511,7 +10523,7 @@ other letters each with relative frequency 1.
 @sp 1.0
 @center @image{fig/chap2/Fig2.18a,81mm,,,.pdf}
 @sp 1.0
-@center @strong{Figure 2.18:} A Huffman encoding tree.
+@center @caption{@strong{Figure 2.18:} A Huffman encoding tree.}
 @sp 1.0
 @end iftex
 @end quotation
@@ -10892,7 +10904,8 @@ access parts of a complex number independent of how the number is represented.
 The resulting complex-number system, as shown in @ref{Figure 2.19}, contains
 two different kinds of abstraction barriers.  The ``horizontal'' abstraction
 barriers play the same role as the ones in @ref{Figure 2.1}.
-They isolate``higher-level'' operations from ``lower-level''
+They isolate ``higher-level'' operations from 
+``lower-level''
 rep@-re@-sen@-ta@-tions.  In addition, there is a ``vertical'' barrier that
 gives us the ability to separately design and install alternative
 representations.
@@ -10922,7 +10935,7 @@ representations.
 @sp 0.0
 @center @image{fig/chap2/Fig2.19a,108mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.19:} Data-abstraction barriers in the complex-number system.
+@center @caption{@strong{Figure 2.19:} Data-abstraction barriers in the complex-number system.}
 @sp 0.8
 @end iftex
 @end float
@@ -10974,18 +10987,14 @@ Imaginary-part(z_1 + z_2) = Imaginary-part(z_1) + Imaginary-part(z_2)
 
 @end ifinfo
 @tex
-% $$ \eqalign{
-% \hbox{Real-part} (z_1 + z_2)\; 		&=
-% 	\hbox{ Real-part} (z_1)\; + \hbox{ Real-part} (z_2), \cr
-% \hbox{Imaginary-part} (z_1 + z_2)\; 	&=
-% 	\hbox{ Imaginary-part} (z_1)\; + \hbox{ Imaginary-part} (z_2). \cr
-% } $$
+$$
 \begin{array}{r@{{}={}}l}
   \hbox{Real-part} (z_1 + z_2)\; 	&
 	\hbox{ Real-part} (z_1)\; + \hbox{ Real-part} (z_2), \\
   \hbox{Imaginary-part} (z_1 + z_2)\; 	&
 	\hbox{ Imaginary-part} (z_1)\; + \hbox{ Imaginary-part} (z_2).
 \end{array}
+$$
 @end tex
 
 @float
@@ -11013,7 +11022,7 @@ Imaginary-part(z_1 + z_2) = Imaginary-part(z_1) + Imaginary-part(z_2)
 @sp 0.2
 @center @image{fig/chap2/Fig2.20,79mm,,,.pdf}
 @sp 0.4
-@center @strong{Figure 2.20:} Complex numbers as points in the plane.
+@center @caption{@strong{Figure 2.20:} Complex numbers as points in the plane.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -11034,18 +11043,14 @@ Angle(z_1 * z_2) = Angle(z_1) + Angle(z_2)
 
 @end ifinfo
 @tex
-% $$ \eqalign{
-% 	\hbox{Magnitude} (z_1 \cdot z_2)\; 	&=
-% 		\hbox{ Magnitude} (z_1)\; \cdot \hbox{ Magnitude} (z_2), \cr
-% 	\hbox{Angle} (z_1 \cdot z_2)\; 		&=
-% 		\hbox{ Angle} (z_1)\; + \hbox{ Angle} (z_2). \cr
-% } $$
+$$
 \begin{array}{r@{{}={}}l}
 	\hbox{Magnitude} (z_1 \cdot z_2)\; 	&
 		\hbox{ Magnitude} (z_1)\; \cdot \hbox{ Magnitude} (z_2), \\
 	\hbox{Angle} (z_1 \cdot z_2)\; 		&
 		\hbox{ Angle} (z_1)\; + \hbox{ Angle} (z_2).
 \end{array}
+$$
 @end tex
 
 @noindent
@@ -11133,14 +11138,12 @@ y = r sin A     A = arctan(y,x)
 
 @end ifinfo
 @tex
-% $$ \eqalign{
-% 	x = r \cos A, \qquad 	& r = \sqrt{x^2 + y^2}, \cr
-% 	y = r \sin A, \qquad 	& A = \arctan(y, x), \cr
-% } $$
+$$
 \begin{array}{r@{{}={}}lr@{{}={}}l}
 	x & r \cos A, \qquad 	& r & \sqrt{x^2 + y^2}, \\
 	y & r \sin A, \qquad 	& A & \arctan(y, x),
 \end{array}
+$$
 @end tex
 @noindent
 which relate the real and imaginary parts @math{(x, y)} to the magnitude and
@@ -11385,7 +11388,7 @@ interface.
 @sp 0.3
 @center @image{fig/chap2/Fig2.21a,108mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 2.21:} Structure of the generic complex-arithmetic system. @short
+@center @caption{@strong{Figure 2.21:} Structure of the generic complex-arithmetic system. }@short
 @sp 0.8
 @end iftex
 @end float
@@ -11484,7 +11487,7 @@ angle      | angle-polar     | angle-rectangular
 @sp 0.3
 @center @image{fig/chap2/Fig2.22,102mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.22:} Table of operations for the complex-number system. @short
+@center @caption{@strong{Figure 2.22:} Table of operations for the complex-number system. }@short
 @sp 0.8
 @end iftex
 @end float
@@ -11890,7 +11893,7 @@ incorporates all the arithmetic packages we have already constructed.
 @sp 0.2
 @center @image{fig/chap2/Fig2.23a,111mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 2.23:} Generic arithmetic system.
+@center @caption{@strong{Figure 2.23:} Generic arithmetic system.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -12111,7 +12114,7 @@ package is stripped off (by applying @code{contents}) and the next level of tag
 @sp 0.4
 @center @image{fig/chap2/Fig2.24c,64mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 2.24:} Representation of @math{3 + 4i} in rectangular form.
+@center @caption{@strong{Figure 2.24:} Representation of @math{3 + 4i} in rectangular form.}
 @sp 0.6
 @end iftex
 @end quotation
@@ -12376,7 +12379,7 @@ integer
 @sp 0.2
 @center @image{fig/chap2/Fig2.25,11mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 2.25:} A tower of types.
+@center @caption{@strong{Figure 2.25:} A tower of types.}
 @sp 0.0
 @end iftex
 @end quotation
@@ -12450,7 +12453,7 @@ triangle      right          |       \    |
 @sp 0.1
 @center @image{fig/chap2/Fig2.26e,96mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 2.26:} Relations among types of geometric figures.
+@center @caption{@strong{Figure 2.26:} Relations among types of geometric figures.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -13268,16 +13271,13 @@ P_3 : 13x + 5
 
 @end ifinfo
 @tex
-% $$ \eqalign{
-% 	P_1 	&: \quad x^2 - 2x + 1, \cr
-% 	P_2 	&: \quad 11x^2 + 7, \cr
-% 	P_3 	&: \quad 13x + 5. \cr
-% } $$
+$$
 \begin{array}{l@{{}:}l}
 	P_1 	& \quad x^2 - 2x + 1, \\
 	P_2 	& \quad 11x^2 + 7, \\
 	P_3 	& \quad 13x + 5.
 \end{array}
+$$
 @end tex
 Now define @math{Q_1} to be the product of @math{P_1} and @math{P_2} and @math{Q_2} to be
 the product of @math{P_1} and @math{P_3}, and use @code{greatest-common-divisor}
@@ -13638,12 +13638,12 @@ decrementing @code{balance} and then returning the value of @code{balance}.  In
 general, evaluating the expression
 
 @lisp
-(begin @math{\langle}@math{exp_1}@math{\rangle} @math{\langle}@math{exp_2}@math{\rangle} @dots{} @math{\langle}@math{exp_k}@math{\rangle})
+(begin @math{\langle}@var{exp}@math{_{\mono{1}}\rangle} @math{\langle}@var{exp}@math{_{\mono{2}}\rangle} @dots{} @math{\langle}@var{exp}@math{_{\monoit{k}}\rangle})
 @end lisp
 
 @noindent
-causes the expressions @math{\langle\kern0.06em}@math{exp_1}@math{\rangle} through @math{\langle\kern0.06em}@math{exp_k}@math{\rangle} to be evaluated
-in sequence and the value of the final expression @math{\langle\kern0.06em}@math{exp_k}@math{\rangle} to be
+causes the expressions @math{\langle\kern0.06em}@var{exp}@math{_1\rangle} through @math{\langle\kern0.06em}@var{exp}@math{_k\rangle} to be evaluated
+in sequence and the value of the final expression @math{\langle\kern0.06em}@var{exp}@math{_k\rangle} to be
 returned as the value of the entire @code{begin} form.@footnote{We have already
 used @code{begin} implicitly in our programs, because in Scheme the body of a
 procedure can be a sequence of expressions.  Also, the @math{\langle}@var{consequent}@math{\kern0.06em\rangle} part
@@ -14530,7 +14530,7 @@ frame II is said to @newterm{shadow} the binding of @code{x} to 3 in frame I.
 @sp 0.0
 @center @image{fig/chap3/Fig3.1,48mm,,,.pdf}
 @sp 0.4
-@center @strong{Figure 3.1:} A simple environment structure.
+@center @caption{@strong{Figure 3.1:} A simple environment structure.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -14660,7 +14660,7 @@ env        | square: --+          |
 @sp 0.2
 @center @image{fig/chap3/Fig3.2b,49mm,,,.pdf}
 @sp 0.5
-@strong{Figure 3.2:} Environment structure produced by evaluating @* @code{(define (square x) (* x x))} in the global environment.
+@caption{@strong{Figure 3.2:} Environment structure produced by evaluating @* @code{(define (square x) (* x x))} in the global environment.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -14714,7 +14714,7 @@ env       | square: --+                        |
 @sp 0.3
 @center @image{fig/chap3/Fig3.3b,78mm,,,.pdf}
 @sp 0.5
-@strong{Figure 3.3:} Environment created by evaluating @code{(square 5)} in the global environment.
+@caption{@strong{Figure 3.3:} Environment created by evaluating @code{(square 5)} in the global environment.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -14817,7 +14817,7 @@ env       | f: --+                                     |
 @sp 0.3
 @center @image{fig/chap3/Fig3.4a,106mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 3.4:} Procedure objects in the global frame.
+@center @caption{@strong{Figure 3.4:} Procedure objects in the global frame.}
 @sp 0.7
 @end iftex
 @c @end quotation
@@ -14883,7 +14883,7 @@ env       +-----------------------------------------------------+
 @sp 0.3
 @center @image{fig/chap3/Fig3.5a,100mm,,,.pdf}
 @sp 0.5
-@strong{Figure 3.5:} Environments created by evaluating @code{(f 5)} using the procedures in @ref{Figure 3.4}.
+@caption{@strong{Figure 3.5:} Environments created by evaluating @code{(f 5)} using the procedures in @ref{Figure 3.4}.}
 @sp 0.9
 @end iftex
 @c @end quotation
@@ -15005,7 +15005,7 @@ env       +------------------|--------+
 @sp 0.2
 @center @image{fig/chap3/Fig3.6b,91mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 3.6:} Result of defining @code{make-withdraw} in the global environment.
+@center @caption{@strong{Figure 3.6:} Result of defining @code{make-withdraw} in the global environment.}
 @sp 0.8
 @end iftex
 @end float
@@ -15043,7 +15043,7 @@ global -->|                                       |       |
 @sp 0.4
 @center @image{fig/chap3/Fig3.7a,100mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 3.7:} Result of evaluating @code{(define W1 (make-withdraw 100))}. @short
+@center @caption{@strong{Figure 3.7:} Result of evaluating @code{(define W1 (make-withdraw 100))}. }@short
 @sp 0.9
 @end iftex
 @c @end quotation
@@ -15102,7 +15102,7 @@ env       | W1: --+                                           |
 @sp 0.1
 @center @image{fig/chap3/Fig3.8c,99mm,,,.pdf}
 @sp 0.2
-@center @strong{Figure 3.8:} Environments created by applying the procedure object @code{W1}. @short
+@center @caption{@strong{Figure 3.8:} Environments created by applying the procedure object @code{W1}. }@short
 @sp 0.7
 @end iftex
 @c @end quotation
@@ -15169,7 +15169,7 @@ env        | W1: --+                            |
 @sp 1.0
 @center @image{fig/chap3/Fig3.9a,96mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.9:} Environments after the call to @code{W1}.
+@center @caption{@strong{Figure 3.9:} Environments after the call to @code{W1}.}
 @sp 1.0
 @end iftex
 @end quotation
@@ -15227,7 +15227,7 @@ env      | W1: --+                        |                |
 @sp 1.0
 @center @image{fig/chap3/Fig3.10a,108mm,,,.pdf}
 @sp 0.7
-@strong{Figure 3.10:} Using @code{(define W2 (make-withdraw 100))} to create a second object.
+@caption{@strong{Figure 3.10:} Using @code{(define W2 (make-withdraw 100))} to create a second object.}
 @sp 1.0
 @end iftex
 @c @end quotation
@@ -15374,7 +15374,7 @@ body: (define good-enough? ...)      | sqrt-iter: ... |      |
 @sp 0.5
 @center @image{fig/chap3/Fig3.11a,107mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.11:} @code{sqrt} procedure with internal definitions.
+@center @caption{@strong{Figure 3.11:} @code{sqrt} procedure with internal definitions.}
 @sp 0.7
 @end iftex
 @c @end quotation
@@ -15576,7 +15576,7 @@ x -->| * | *-+---->| * | *-+---->| * | / |
 @sp 0.7
 @center @image{fig/chap3/Fig3.12b,72mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.12:} Lists @code{x}: @code{((a b) c d)} and @code{y}: @code{(e f)}.
+@center @caption{@strong{Figure 3.12:} Lists @code{x}: @code{((a b) c d)} and @code{y}: @code{(e f)}.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -15618,7 +15618,7 @@ x -->| * | *-+---->| * | *-+---->| * | / |
 @sp 0.0
 @center @image{fig/chap3/Fig3.13b,72mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.13:} Effect of @code{(set-car! x y)} on the lists in @ref{Figure 3.12}. @short
+@center @caption{@strong{Figure 3.13:} Effect of @code{(set-car! x y)} on the lists in @ref{Figure 3.12}. }@short
 @sp 0.7
 @end iftex
 @end quotation
@@ -15658,7 +15658,7 @@ z -->| * | *-+-+   +---+         +---+
 @sp 0.7
 @center @image{fig/chap3/Fig3.14b,72mm,,,.pdf}
 @sp 0.7
-@strong{Figure 3.14:} Effect of @code{(define z (cons y (cdr x)))} on the lists in @ref{Figure 3.12}.
+@caption{@strong{Figure 3.14:} Effect of @code{(define z (cons y (cdr x)))} on the lists in @ref{Figure 3.12}.}
 @sp 0.0
 @end iftex
 @end quotation
@@ -15700,7 +15700,7 @@ x -->| * | * |     | * | *-+---->| * | / |
 @sp 0.0
 @center @image{fig/chap3/Fig3.15b,72mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.15:} Effect of @code{(set-cdr! x y)} on the lists in @ref{Figure 3.12}. @short
+@center @caption{@strong{Figure 3.15:} Effect of @code{(set-cdr! x y)} on the lists in @ref{Figure 3.12}. }@short
 @sp 0.7
 @end iftex
 @end quotation
@@ -15891,7 +15891,7 @@ z1 -->| * | * |
 @sp 0.5
 @center @image{fig/chap3/Fig3.16b,46mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.16:} The list @code{z1} formed by @code{(cons x x)}.
+@center @caption{@strong{Figure 3.16:} The list @code{z1} formed by @code{(cons x x)}.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -15923,7 +15923,7 @@ z2 -->| * | *-+---->| * | *-+---->| * | / |
 @sp 0.1
 @center @image{fig/chap3/Fig3.17b,71mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.17:} The list @code{z2} formed by @code{(cons (list 'a 'b) (list 'a 'b))}.
+@center @caption{@strong{Figure 3.17:} The list @code{z2} formed by @code{(cons (list 'a 'b) (list 'a 'b))}.}
 @sp 1.0
 @end iftex
 @end float
@@ -16143,7 +16143,7 @@ Operation                Resulting Queue
 @sp 0.2
 @center @image{fig/chap3/Fig3.18a,70mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 3.18:} Queue operations.
+@center @caption{@strong{Figure 3.18:} Queue operations.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -16238,7 +16238,7 @@ representation.
 @sp 0.1
 @center @image{fig/chap3/Fig3.19b,69mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.19:} Implementation of a queue as a list with front and rear pointers.
+@center @caption{@strong{Figure 3.19:} Implementation of a queue as a list with front and rear pointers.}
 @sp 0.9
 @end iftex
 @end float
@@ -16309,7 +16309,7 @@ pair indicated by the front pointer:
 @sp 0.3
 @center @image{fig/chap3/Fig3.20b,88mm,,,.pdf}
 @sp 0.7
-@strong{Figure 3.20:} Result of using @code{(insert-queue! q 'd)} on the queue of @ref{Figure 3.19}.
+@caption{@strong{Figure 3.20:} Result of using @code{(insert-queue! q 'd)} on the queue of @ref{Figure 3.19}.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -16362,7 +16362,7 @@ also set the rear pointer to the new pair.
 @sp 0.3
 @center @image{fig/chap3/Fig3.21b,88mm,,,.pdf}
 @sp 0.6
-@strong{Figure 3.21:} Result of using @code{(delete-queue!  q)} on the queue of @ref{Figure 3.20}.
+@caption{@strong{Figure 3.21:} Result of using @code{(delete-queue!  q)} on the queue of @ref{Figure 3.20}.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -16484,7 +16484,7 @@ see how to build tables as mutable list structures.
 @sp 0.3
 @center @image{fig/chap3/Fig3.22c,81mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.22:} A table represented as a headed list.
+@center @caption{@strong{Figure 3.22:} A table represented as a headed list.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -16641,7 +16641,7 @@ table
 @sp 0.3
 @center @image{fig/chap3/Fig3.23a,103mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.23:} A two-dimensional table.
+@center @caption{@strong{Figure 3.23:} A two-dimensional table.}
 @sp 0.9
 @end iftex
 @c @end quotation
@@ -16749,7 +16749,7 @@ table.
 two-dimensional tables, show how to implement a table in which values are
 stored under an arbitrary number of keys and different values may be stored
 under different numbers of keys.  The @code{lookup} and @code{insert!}
-proce- dures should take as input a list of keys used to access the table.
+procedures should take as input a list of keys used to access the table.
 @end quotation
 
 @quotation
@@ -16871,7 +16871,7 @@ Inverter    And-gate     Or-gate
 @sp 0.4
 @center @image{fig/chap3/Fig3.24b,74mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 3.24:} Primitive functions in the digital logic simulator. @short
+@center @caption{@strong{Figure 3.24:} Primitive functions in the digital logic simulator. }@short
 @sp 0.7
 @end iftex
 @end quotation
@@ -16913,7 +16913,7 @@ B -----*------|___/                        |
 @sp 0.7
 @center @image{fig/chap3/Fig3.25c,72mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.25:} A half-adder circuit.
+@center @caption{@strong{Figure 3.25:} A half-adder circuit.}
 @sp 1.2
 @end iftex
 @end quotation
@@ -17011,7 +17011,7 @@ C -----+       +---------------/___/   |
 @sp 0.1
 @center @image{fig/chap3/Fig3.26a,74mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.26:} A full-adder circuit.
+@center @caption{@strong{Figure 3.26:} A full-adder circuit.}
 @sp 1.2
 @end iftex
 @end quotation
@@ -17159,7 +17159,7 @@ C ------+   |     +-----+   |     +-----+   |     :  ------+   |
 @sp 0.1
 @center @image{fig/chap3/Fig3.27a,96mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 3.27:} A ripple-carry adder for @math{n}-bit numbers.
+@center @caption{@strong{Figure 3.27:} A ripple-carry adder for @math{n}-bit numbers.}
 @sp 0.3
 @end iftex
 @end quotation
@@ -17640,7 +17640,7 @@ C -----+ m1      |  u  |      m1 +-------+ a1      |
 @sp 0.1
 @center @image{fig/chap3/Fig3.28,87mm,,,.pdf}
 @sp 0.4
-@center @strong{Figure 3.28:} The relation @math{9C = 5(F - 32)} expressed as a constraint network.
+@center @caption{@strong{Figure 3.28:} The relation @math{9C = 5(F - 32)} expressed as a constraint network.}
 @sp 0.7
 @end iftex
 @end float
@@ -18352,7 +18352,7 @@ time
 @center @image{fig/chap3/Fig3.29b,109mm,,,.pdf}
 @sp 0.8
 @noindent
-@strong{Figure 3.29:} Timing diagram showing how interleaving the order of events in two banking withdrawals can lead to an incorrect final balance.
+@caption{@strong{Figure 3.29:} Timing diagram showing how interleaving the order of events in two banking withdrawals can lead to an incorrect final balance.}
 @sp 1.2
 @end iftex
 @end float
@@ -18456,7 +18456,7 @@ time
 @sp 0.3
 @center @image{fig/chap3/Fig3.30b,94mm,,,.pdf}
 @sp 0.7
-@strong{Figure 3.30:} Concurrent deposits and withdrawals from a joint @w{account} in Bank1 and a private account in Bank2.
+@caption{@strong{Figure 3.30:} Concurrent deposits and withdrawals from a joint @w{account} in Bank1 and a private account in Bank2.}
 @sp 1.0
 @end iftex
 @end quotation
@@ -18576,12 +18576,12 @@ To make the above mechanism more concrete, suppose that we have extended Scheme
 to include a procedure called @code{parallel-execute}:
 
 @lisp
-(parallel-execute @math{\langle}@math{p_1}@math{\rangle} @math{\langle}@math{p_2}@math{\rangle} @dots{} @math{\langle}@math{p_k}@math{\rangle})
+(parallel-execute @math{\langle}@var{p}@math{_{\mono{1}}\rangle} @math{\langle}@var{p}@math{_{\mono{2}}\rangle} @dots{} @math{\langle}@var{p}@math{_{\monoit{k}}\rangle})
 @end lisp
 
 @noindent
-Each @math{\langle}@math{p}@math{\kern0.08em\rangle} must be a procedure of no arguments.  @code{parallel-execute}
-creates a separate process for each @math{\langle}@math{p}@math{\kern0.08em\rangle}, which applies @math{\langle}@math{p}@math{\kern0.08em\rangle} (to no
+Each @math{\langle p \rangle} must be a procedure of no arguments.  @code{parallel-execute}
+creates a separate process for each @math{\langle p \rangle}, which applies @math{\langle p \rangle} (to no
 arguments).  These processes all run
 concurrently.@footnote{@code{parallel-execute} is not part of standard Scheme,
 but it can be implemented in @acronym{MIT} Scheme.  In our implementation, the
@@ -19879,7 +19879,7 @@ infinite, because the sieve contains a sieve within it.
 @sp 0.1
 @center @image{fig/chap3/Fig3.31,111mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 3.31:} The prime sieve viewed as a signal-processing system.
+@center @caption{@strong{Figure 3.31:} The prime sieve viewed as a signal-processing system.}
 @sp 0.8
 @end iftex
 @c @end quotation
@@ -20160,13 +20160,19 @@ sin x = x - ----- + ------------- - ...
 
 @end ifinfo
 @tex
+$$
 e^x = 1 + x + \displaystyle\frac{x^2}{2} + \displaystyle\frac{x^3}{3 \cdot 2} + \displaystyle\frac{x^4}{4 \cdot 3 \cdot 2} + \dots,
+$$
 @end tex
 @tex
+$$
 \cos x = 1 - \displaystyle\frac{x^2}{2} + \displaystyle\frac{x^4}{4 \cdot 3 \cdot 2} - \dots,
+$$
 @end tex
 @tex
+$$
 \sin x = x - \displaystyle\frac{x^3}{3 \cdot 2} + \displaystyle\frac{x^5}{5 \cdot 4 \cdot 3 \cdot 2} - \dots
+$$
 @end tex
 @noindent
 represented as infinite streams.  We will represent the series @math{a_0 +
@@ -20251,18 +20257,14 @@ constant term.  Then we can solve for @math{X} as follows:
 
 @end ifinfo
 @tex
-% $$ \eqalign{
-% 	        S \cdot X 	&= 1, \cr
-% 	(1 + S_R) \cdot X 	&= 1, \cr
-% 	  X + S_R \cdot X 	&= 1, \cr
-% 	            	X 	&= 1 - S_R \cdot X. \cr
-% } $$
+$$
 \begin{array}{r@{{}={}}l}
 	        S \cdot X 	& 1, \\
 	(1 + S_R) \cdot X 	& 1, \\
 	  X + S_R \cdot X 	& 1, \\
 	            	X 	& 1 - S_R \cdot X.
 \end{array}
+$$
 @end tex
 In other words, @math{X} is the power series whose constant term is 1 and whose
 higher-order terms are given by the negative of @math{S_R} times @math{X}.  Use
@@ -20942,7 +20944,7 @@ input  |           |      |\__    +-->|   \_  integral
 @sp 0.2
 @center @image{fig/chap3/Fig3.32,102mm,,,.pdf}
 @sp 0.5
-@strong{Figure 3.32:} The @code{integral} procedure viewed as a signal-processing system.
+@caption{@strong{Figure 3.32:} The @code{integral} procedure viewed as a signal-processing system.}
 @sp 0.8
 @end iftex
 @c @end quotation
@@ -20991,7 +20993,7 @@ accompanying signal-flow diagram.
 @sp 0.1
 @center @image{fig/chap3/Fig3.33,94mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 3.33:} An RC circuit and the associated signal-flow diagram. @short
+@center @caption{@strong{Figure 3.33:} An RC circuit and the associated signal-flow diagram. }@short
 @sp 0.9
 @end iftex
 @end float
@@ -21144,7 +21146,7 @@ would outlaw loops.
 @sp 0.2
 @center @image{fig/chap3/Fig3.34,67mm,,,.pdf}
 @sp 0.5
-@strong{Figure 3.34:} An ``analog computer circuit'' that solves the equation @math{dy / dt = f(y)}.
+@caption{@strong{Figure 3.34:} An ``analog computer circuit'' that solves the equation @math{dy / dt = f(y)}.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -21284,7 +21286,7 @@ expects the @code{integrand} as a delayed argument and hence can be used in the
 @sp 0.0
 @center @image{fig/chap3/Fig3.35a,91mm,,,.pdf}
 @sp 0.3
-@strong{Figure 3.35:} Signal-flow diagram for the solution to a second-order linear differential equation.
+@caption{@strong{Figure 3.35:} Signal-flow diagram for the solution to a second-order linear differential equation.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -21347,7 +21349,7 @@ v_C -+- C                     _)  v_L
 @sp 0.0
 @center @image{fig/chap3/Fig3.36,60mm,,,.pdf}
 @sp 0.5
-@center @strong{Figure 3.36:} A series RLC circuit.
+@center @caption{@strong{Figure 3.36:} A series RLC circuit.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -21453,7 +21455,7 @@ shown in @ref{Figure 3.37}.
 @sp 0.0
 @center @image{fig/chap3/Fig3.37a,68mm,,,.pdf}
 @sp 0.8
-@strong{Figure 3.37:} A signal-flow diagram for the solution to a series RLC circuit.
+@caption{@strong{Figure 3.37:} A signal-flow diagram for the solution to a series RLC circuit.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -21751,7 +21753,7 @@ Paul's requests    |  merge  |---->| bank    |---->
 @sp 0.2
 @center @image{fig/chap3/Fig3.38,88mm,,,.pdf}
 @sp 0.6
-@strong{Figure 3.38:} A joint bank account, modeled by merging two streams of transaction requests.
+@caption{@strong{Figure 3.38:} A joint bank account, modeled by merging two streams of transaction requests.}
 @sp 1.2
 @end iftex
 @end quotation
@@ -22080,7 +22082,7 @@ Arguments   |  8     Eval          `888888888888888888) | Environment
 @sp 0.3
 @center @image{fig/chap4/Fig4.1,100mm,,,.pdf}
 @sp 0.5
-@strong{Figure 4.1:} The @code{eval}-@code{apply} cycle exposes the essence of a computer language.
+@caption{@strong{Figure 4.1:} The @code{eval}-@code{apply} cycle exposes the essence of a computer language.}
 @sp 0.7
 @end iftex
 @c @end quotation
@@ -22432,7 +22434,7 @@ Definitions have the form
 or the form
 
 @lisp
-(define (@math{\langle}@var{var}@math{\rangle} @math{\langle}@math{parameter_1}@math{\rangle} @dots{} @math{\langle}@math{parameter_n}@math{\rangle})
+(define (@math{\langle}@var{var}@math{\rangle} @math{\langle}@var{parameter}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{parameter}@math{_{\monoit{n}}\rangle})
   @math{\langle}@var{body}@math{\rangle})
 @end lisp
 
@@ -22440,7 +22442,7 @@ The latter form (standard procedure definition) is syntactic sugar for
 
 @lisp
 (define @math{\langle}@var{var}@math{\rangle}
-  (lambda (@math{\langle}@math{parameter_1}@math{\rangle} @dots{} @math{\langle}@math{parameter_n}@math{\rangle})
+  (lambda (@math{\langle}@var{parameter}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{parameter}@math{_{\monoit{n}}\rangle})
     @math{\langle}@var{body}@math{\rangle}))
 @end lisp
 
@@ -22712,7 +22714,7 @@ extended syntax.
 expressions, because
 
 @lisp
-(let ((@math{\langle}@math{var_1}@math{\rangle} @math{\langle}@math{exp_1}@math{\rangle}) @dots{} (@math{\langle}@math{var_n}@math{\rangle} @math{\langle}@math{exp_n}@math{\rangle}))
+(let ((@math{\langle}@var{var}@math{_{\mono{1}}\rangle} @math{\langle}@var{exp}@math{_{\mono{1}}\rangle}) @dots{} (@math{\langle}@var{var}@math{_{\monoit{n}}\rangle} @math{\langle}@var{exp}@math{_{\monoit{n}}\rangle}))
   @math{\langle}@var{body}@math{\rangle})
 @end lisp
 
@@ -22720,11 +22722,11 @@ expressions, because
 is equivalent to
 
 @lisp
-((lambda (@math{\langle}@math{var_1}@math{\rangle} @dots{} @math{\langle}@math{var_n}@math{\rangle})
+((lambda (@math{\langle}@var{var}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{var}@math{_{\monoit{n}}\rangle})
    @math{\langle}@var{body}@math{\rangle})
- @math{\langle}@math{exp_1}@math{\rangle}
+ @math{\langle}@var{exp}@math{_{\mono{1}}\rangle}
  @dots{}
- @math{\langle}@math{exp_n}@math{\rangle})
+ @math{\langle}@var{exp}@math{_{\monoit{n}}\rangle})
 @end lisp
 
 Implement a syntactic transformation @code{let->combination} that reduces
@@ -23291,7 +23293,7 @@ the evaluator will be able to compute factorials.
 @sp 0.1
 @center @image{fig/chap4/Fig4.2,84mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 4.2:} The factorial program, viewed as an abstract machine.
+@center @caption{@strong{Figure 4.2:} The factorial program, viewed as an abstract machine.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -23362,7 +23364,7 @@ explores some of these ideas (@ref{Hofstadter 1979}).}
 @sp 0.3
 @center @image{fig/chap4/Fig4.3,69mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 4.3:} The evaluator emulating a factorial machine.
+@center @caption{@strong{Figure 4.3:} The evaluator emulating a factorial machine.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -23386,7 +23388,7 @@ expression, by making @code{eval} available for use in programs.  Many Lisp
 dialects provide a primitive @code{eval} procedure that takes as arguments an
 expression and an environment and evaluates the expression relative to the
 environment.@footnote{Warning: This @code{eval} primitive is not identical to
-the @code{eval} procedure we imple- mented in @ref{Section 4.1.1}, because it
+the @code{eval} procedure we implemented in @ref{Section 4.1.1}, because it
 uses @emph{actual} Scheme environments rather than the sample environment
 structures we built in @ref{Section 4.1.3}.  These actual environments cannot
 be manipulated by the user as ordinary lists; they must be accessed via
@@ -23661,14 +23663,14 @@ the same meaning, as
 @code{letrec} expressions, which have the form
 
 @lisp
-(letrec ((@math{\langle}@math{var_1}@math{\rangle} @math{\langle}@math{exp_1}@math{\rangle}) @dots{} (@math{\langle}@math{var_n}@math{\rangle} @math{\langle}@math{exp_n}@math{\rangle}))
+(letrec ((@math{\langle}@var{var}@math{_{\mono{1}}\rangle} @math{\langle}@var{exp}@math{_{\mono{1}}\rangle}) @dots{} (@math{\langle}@var{var}@math{_{\monoit{n}}\rangle} @math{\langle}@var{exp}@math{_{\monoit{n}}\rangle}))
   @math{\langle}@var{body}@math{\rangle})
 @end lisp
 
 @noindent
 are a variation on @code{let} in which the expressions
-@math{\langle}@math{exp_k}@math{\kern0.08em\rangle} that provide the initial values for the
-variables @math{\langle}@math{var_k}@math{\kern0.08em\rangle} are evaluated in an environment
+@math{\langle}@var{exp}@math{_k\rangle} that provide the initial values for the
+variables @math{\langle}@var{var}@math{_k\rangle} are evaluated in an environment
 that includes all the @code{letrec} bindings.  This permits recursion in the
 bindings, such as the mutual recursion of @code{even?} and @code{odd?} in the
 example above, or the evaluation of 10 factorial with
@@ -24819,7 +24821,7 @@ programming was first described in 1961 by John McCarthy (see @ref{McCarthy 1963
 The expression
 
 @lisp
-(amb @math{\langle}@math{e_1}@math{\rangle} @math{\langle}@math{e_2}@math{\rangle} @dots{} @math{\langle}@math{e_n}@math{\rangle})
+(amb @math{\langle}@var{e}@math{_{\mono{1}}\rangle} @math{\langle}@var{e}@math{_{\mono{2}}\rangle} @dots{} @math{\langle}@var{e}@math{_{\monoit{n}}\rangle})
 @end lisp
 
 @noindent
@@ -26622,12 +26624,12 @@ The resulting output is
 In general,
 
 @lisp
-(and @math{\langle}@math{query_1}@math{\rangle} @math{\langle}@math{query_2}@math{\rangle} @dots{} @math{\langle}@math{query_n}@math{\rangle})
+(and @math{\langle}@var{query}@math{_{\mono{1}}\rangle} @math{\langle}@var{query}@math{_{\mono{2}}\rangle} @dots{} @math{\langle}@var{query}@math{_{\monoit{n}}\rangle})
 @end lisp
 
 @noindent
 is satisfied by all sets of values for the pattern variables that
-simultaneously satisfy @math{\langle}@math{query_1}@math{\rangle} @dots{} @math{\langle}@math{query_n}@math{\rangle}.
+simultaneously satisfy @math{\langle}@var{query}@math{_1\rangle} @dots{} @math{\langle}@var{query}@math{_n\rangle}.
 
 As for simple queries, the system processes a compound query by finding all
 assignments to the pattern variables that satisfy the query, then displaying
@@ -26659,12 +26661,12 @@ will find all employees supervised by Ben Bitdiddle or Alyssa P.  Hacker:
 In general,
 
 @lisp
-(or @math{\langle}@math{query_1}@math{\rangle} @math{\langle}@math{query_2}@math{\rangle} @dots{} @math{\langle}@math{query_n}@math{\rangle})
+(or @math{\langle}@var{query}@math{_{\mono{1}}\rangle} @math{\langle}@var{query}@math{_{\mono{2}}\rangle} @dots{} @math{\langle}@var{query}@math{_{\monoit{n}}\rangle})
 @end lisp
 
 @noindent
 is satisfied by all sets of values for the pattern variables that satisfy at
-least one of @math{\langle}@math{query_1}@math{\rangle} @dots{} @math{\langle}@math{query_n}@math{\rangle}.
+least one of @math{\langle}@var{query}@math{_1\rangle} @dots{} @math{\langle}@var{query}@math{_n\rangle}.
 
 Compound queries can also be formed with @code{not}. For example,
 
@@ -26678,12 +26680,12 @@ finds all people supervised by Ben Bitdiddle who are not computer programmers.
 In general,
 
 @lisp
-(not @math{\langle}@math{query_1}@math{\rangle})
+(not @math{\langle}@var{query}@math{_{\mono{1}}\rangle})
 @end lisp
 
 @noindent
 is satisfied by all assignments to the pattern variables that do not satisfy
-@math{\langle}@math{query_1}@math{\rangle}.@footnote{Actually, this description of @code{not} is valid
+@math{\langle}@var{query}@math{_1\rangle}.@footnote{Actually, this description of @code{not} is valid
 only for simple cases.  The real behavior of @code{not} is more complex.  We
 will examine @code{not}'s peculiarities in sections @ref{Section 4.4.2} and
 @ref{Section 4.4.3}.}
@@ -26694,13 +26696,13 @@ predicate to be applied to the rest of the (instantiated) elements as
 arguments.  In general,
 
 @lisp
-(lisp-value @math{\langle}@var{predicate}@math{\rangle} @math{\langle}@math{arg_1}@math{\rangle} @dots{} @math{\langle}@math{arg_n}@math{\rangle})
+(lisp-value @math{\langle}@var{predicate}@math{\rangle} @math{\langle}@var{arg}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{arg}@math{_{\monoit{n}}\rangle})
 @end lisp
 
 @noindent
 will be satisfied by assignments to the pattern variables for which the
-@math{\langle}@var{predicate}@math{\rangle} applied to the instantiated @math{\langle}@math{arg_1}@math{\rangle} @dots{}
-@math{\langle}@math{arg_n}@math{\rangle} is true.  For example, to find all people whose salary is
+@math{\langle}@var{predicate}@math{\rangle} applied to the instantiated @math{\langle}@var{arg}@math{_1\rangle} @dots{}
+@math{\langle}@var{arg}@math{_n\rangle} is true.  For example, to find all people whose salary is
 greater than $30,000 we could write@footnote{@code{lisp-value} should be used
 only to perform an operation not provided in the query language.  In
 particular, it should not be used to test equality (since that is what the
@@ -27201,7 +27203,7 @@ is finally printed.
 @sp 0.1
 @center @image{fig/chap4/Fig4.4,102mm,,,.pdf}
 @sp 0.7
-@center @strong{Figure 4.4:} A query processes a stream of frames.
+@center @caption{@strong{Figure 4.4:} A query processes a stream of frames.}
 @sp 0.8
 @end iftex
 @c @end quotation
@@ -27253,7 +27255,7 @@ by operating on the stream of frames in series.
 @sp 0.0
 @center @image{fig/chap4/Fig4.5,93mm,,,.pdf}
 @sp 0.4
-@strong{Figure 4.5:} The @code{and} combination of two queries is produced by operating on the stream of frames in series.
+@caption{@strong{Figure 4.5:} The @code{and} combination of two queries is produced by operating on the stream of frames in series.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -27306,7 +27308,7 @@ frames     | |    ^          +-------+ |  frames
 @sp 0.5
 @center @image{fig/chap4/Fig4.6,107mm,,,.pdf}
 @sp 0.4
-@strong{Figure 4.6:} The @code{or} combination of two queries is produced by operating on the stream of frames in parallel and merging the results.
+@caption{@strong{Figure 4.6:} The @code{or} combination of two queries is produced by operating on the stream of frames in parallel and merging the results.}
 @sp 0.4
 @end iftex
 @end float
@@ -29299,7 +29301,7 @@ represented in a data-path diagram by a triangle containing the constant).
 @sp 0.1
 @center @image{fig/chap5/Fig5.1a,58mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 5.1:} Data paths for a @acronym{GCD} machine.
+@center @caption{@strong{Figure 5.1:} Data paths for a @acronym{GCD} machine.}
 @sp 0.8
 @end iftex
 @end quotation
@@ -29356,7 +29358,7 @@ electrical components.
 @sp 0.5
 @center @image{fig/chap5/Fig5.2,41mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 5.2:} Controller for a @acronym{GCD} machine.
+@center @caption{@strong{Figure 5.2:} Controller for a @acronym{GCD} machine.}
 @sp 0.7
 @end iftex
 @end quotation
@@ -29629,7 +29631,7 @@ Lisp system is dedicated to making reading and printing work.}
 @sp 0.1
 @center @image{fig/chap5/Fig5.4b,107mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 5.4:} A @acronym{GCD} machine that reads inputs and prints results. @short
+@center @caption{@strong{Figure 5.4:} A @acronym{GCD} machine that reads inputs and prints results. }@short
 @sp 0.7
 @end iftex
 @c @end quotation
@@ -29749,7 +29751,7 @@ this way:
 @sp 1.0
 @center @image{fig/chap5/Fig5.5a,67mm,,,.pdf}
 @sp 1.0
-@strong{Figure 5.5:} Data paths and controller for the elaborated @acronym{GCD} machine.
+@caption{@strong{Figure 5.5:} Data paths and controller for the elaborated @acronym{GCD} machine.}
 @sp 1.0
 @end iftex
 @end quotation
@@ -29880,7 +29882,7 @@ after-gcd-2
 @center @image{fig/chap5/Fig5.7b,105mm,,,.pdf}
 @sp 0.7
 @noindent
-@strong{Figure 5.7:} Portions of the data paths and controller sequence for a @w{machine} with two @acronym{GCD} computations.
+@caption{@strong{Figure 5.7:} Portions of the data paths and controller sequence for a @w{machine} with two @acronym{GCD} computations.}
 @sp 0.3
 @end iftex
 @c @end quotation
@@ -30232,7 +30234,7 @@ subcomputation, is needed.
 @sp 0.1
 @center @image{fig/chap5/Fig5.11a,106mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 5.11:} A recursive factorial machine.
+@center @caption{@strong{Figure 5.11:} A recursive factorial machine.}
 @sp 0.0
 @end iftex
 @c @end quotation
@@ -30370,7 +30372,7 @@ instructions?
 @node	5.1.5,  , 5.1.4, 5.1
 
 A controller instruction in our register-machine language has one of the
-following forms, where each @math{\langle}@math{input_i}@math{\rangle} is either @code{(reg
+following forms, where each @math{\langle}@var{input}@math{_i\rangle} is either @code{(reg
 @math{\langle}@var{register-name}@math{\rangle})} or @code{(const @math{\langle}@var{constant-value}@math{\rangle})}.  These
 instructions were introduced in @ref{5.1.1}:
 
@@ -30379,9 +30381,9 @@ instructions were introduced in @ref{5.1.1}:
 (assign @math{\langle}@var{register-name}@math{\rangle} (const @math{\langle}@var{constant-value}@math{\rangle}))
 (assign @math{\langle}@var{register-name}@math{\rangle}
         (op @math{\langle}@var{operation-name}@math{\rangle})
-        @math{\langle}@math{input_1}@math{\rangle} @dots{} @math{\langle}@math{input_n}@math{\rangle})
-(perform (op @math{\langle}@var{operation-name}@math{\rangle}) @math{\langle}@math{input_1}@math{\rangle} @dots{} @math{\langle}@math{input_n}@math{\rangle})
-(test (op @math{\langle}@var{operation-name}@math{\rangle}) @math{\langle}@math{input_1}@math{\rangle} @dots{} @math{\langle}@math{input_n}@math{\rangle})
+        @math{\langle}@var{input}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{input}@math{_{\monoit{n}}\rangle})
+(perform (op @math{\langle}@var{operation-name}@math{\rangle}) @math{\langle}@var{input}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{input}@math{_{\monoit{n}}\rangle})
+(test (op @math{\langle}@var{operation-name}@math{\rangle}) @math{\langle}@var{input}@math{_{\mono{1}}\rangle} @dots{} @math{\langle}@var{input}@math{_{\monoit{n}}\rangle})
 (branch (label @math{\langle}@var{label-name}@math{\rangle}))
 (goto (label @math{\langle}@var{label-name}@math{\rangle}))
 @end lisp
@@ -31668,7 +31670,7 @@ the-cdrs |    | p2 | p4 |    | e0 | p7 |    | e0 |    | ...
 @sp 0.2
 @center @image{fig/chap5/Fig5.14a,91mm,,,.pdf}
 @sp 0.6
-@strong{Figure 5.14:} Box-and-pointer and memory-vector representations of the list @code{((1 2) 3 4)}.
+@caption{@strong{Figure 5.14:} Box-and-pointer and memory-vector representations of the list @code{((1 2) 3 4)}.}
 @sp 0.9
 @end iftex
 @end quotation
@@ -31704,24 +31706,24 @@ vector, or adding two numbers) use only the index portion of the typed pointer.
 For example, we can make a register machine support the instructions
 
 @lisp
-(assign @math{\langle}@math{reg_1}@math{\rangle} (op car) (reg @math{\langle}@math{reg_2}@math{\rangle}))
-(assign @math{\langle}@math{reg_1}@math{\rangle} (op cdr) (reg @math{\langle}@math{reg_2}@math{\rangle}))
+(assign @math{\langle}@var{reg}@math{_{\mono{1}}\rangle} (op car) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
+(assign @math{\langle}@var{reg}@math{_{\mono{1}}\rangle} (op cdr) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
 @end lisp
 
 @noindent
 if we implement these, respectively, as
 
 @lisp
-(assign @math{\langle}@math{reg_1}@math{\rangle} (op vector-ref) (reg the-cars) (reg @math{\langle}@math{reg_2}@math{\rangle}))
-(assign @math{\langle}@math{reg_1}@math{\rangle} (op vector-ref) (reg the-cdrs) (reg @math{\langle}@math{reg_2}@math{\rangle}))
+(assign @math{\langle}@var{reg}@math{_{\mono{1}}\rangle} (op vector-ref) (reg the-cars) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
+(assign @math{\langle}@var{reg}@math{_{\mono{1}}\rangle} (op vector-ref) (reg the-cdrs) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
 @end lisp
 
 @noindent
 The instructions
 
 @lisp
-(perform (op set-car!) (reg @math{\langle}@math{reg_1}@math{\rangle}) (reg @math{\langle}@math{reg_2}@math{\rangle}))
-(perform (op set-cdr!) (reg @math{\langle}@math{reg_1}@math{\rangle}) (reg @math{\langle}@math{reg_2}@math{\rangle}))
+(perform (op set-car!) (reg @math{\langle}@var{reg}@math{_{\mono{1}}\rangle}) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
+(perform (op set-cdr!) (reg @math{\langle}@var{reg}@math{_{\mono{1}}\rangle}) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
 @end lisp
 
 @noindent
@@ -31729,9 +31731,9 @@ are implemented as
 
 @lisp
 (perform
- (op vector-set!) (reg the-cars) (reg @math{\langle}@math{reg_1}@math{\rangle}) (reg @math{\langle}@math{reg_2}@math{\rangle}))
+ (op vector-set!) (reg the-cars) (reg @math{\langle}@var{reg}@math{_{\mono{1}}\rangle}) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
 (perform
- (op vector-set!) (reg the-cdrs) (reg @math{\langle}@math{reg_1}@math{\rangle}) (reg @math{\langle}@math{reg_2}@math{\rangle}))
+ (op vector-set!) (reg the-cdrs) (reg @math{\langle}@var{reg}@math{_{\mono{1}}\rangle}) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
 @end lisp
 
 @noindent
@@ -31747,7 +31749,7 @@ pointer) because we are using a compacting garbage collector, as we will see in
 @ref{5.3.2}.}  For example, the instruction
 
 @lisp
-(assign @math{\langle}@math{reg_1}@math{\rangle} (op cons) (reg @math{\langle}@math{reg_2}@math{\rangle}) (reg @math{\langle}@math{reg_3}@math{\rangle}))
+(assign @math{\langle}@var{reg}@math{_{\mono{1}}\rangle} (op cons) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}) (reg @math{\langle}@var{reg}@math{_{\mono{3}}\rangle}))
 @end lisp
 
 @noindent
@@ -31759,10 +31761,10 @@ essentially the implementation of @code{cons} in terms of @code{set-car!} and
 
 @lisp
 (perform
- (op vector-set!) (reg the-cars) (reg free) (reg @math{\langle}@math{reg_2}@math{\rangle}))
+ (op vector-set!) (reg the-cars) (reg free) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}))
 (perform
- (op vector-set!) (reg the-cdrs) (reg free) (reg @math{\langle}@math{reg_3}@math{\rangle}))
-(assign @math{\langle}@math{reg_1}@math{\rangle} (reg free))
+ (op vector-set!) (reg the-cdrs) (reg free) (reg @math{\langle}@var{reg}@math{_{\mono{3}}\rangle}))
+(assign @math{\langle}@var{reg}@math{_{\mono{1}}\rangle} (reg free))
 (assign free (op +) (reg free) (const 1))
 @end lisp
 
@@ -31770,7 +31772,7 @@ essentially the implementation of @code{cons} in terms of @code{set-car!} and
 The @code{eq?} operation
 
 @lisp
-(op eq?) (reg @math{\langle}@math{reg_1}@math{\rangle}) (reg @math{\langle}@math{reg_2}@math{\rangle})
+(op eq?) (reg @math{\langle}@var{reg}@math{_{\mono{1}}\rangle}) (reg @math{\langle}@var{reg}@math{_{\mono{2}}\rangle})
 @end lisp
 
 @noindent
@@ -31916,14 +31918,14 @@ Any memory cell that is not so accessible may be recycled.
 There are many ways to perform garbage collection.  The method we shall examine
 here is called @newterm{stop-and-copy}.  The basic idea is to divide memory
 into two halves: ``working memory'' and ``free memory.''  When @code{cons}
-constructs pairs, it allocates these in working memory.  When work- ing memory is
-full, we perform garbage collection by locating all the use- ful pairs in working
+constructs pairs, it allocates these in working memory.  When working memory is
+full, we perform garbage collection by locating all the useful pairs in working
 memory and copying these into consecutive locations in free memory.  (The
 useful pairs are located by tracing all the @code{car} and @code{cdr} pointers,
 starting with the machine registers.)  Since we do not copy the garbage, there
 will presumably be additional free memory that we can use to allocate new
 pairs.  In addition, nothing in the working memory is needed, since all the
-useful pairs in it have been copied.  Thus, if we inter- change the roles of
+useful pairs in it have been copied.  Thus, if we interchange the roles of
 working memory and free memory, we can continue processing; new pairs will be
 allocated in the new working memory (which was the old free memory).  When this
 is full, we can copy the useful pairs into the new free memory (which was the
@@ -32029,7 +32031,7 @@ the-cdrs |                  |                 | memory
 @sp 0.4
 @center @image{fig/chap5/Fig5.15a,91mm,,,.pdf}
 @sp 0.6
-@center @strong{Figure 5.15:} Reconfiguration of memory by the garbage-collection process.
+@center @caption{@strong{Figure 5.15:} Reconfiguration of memory by the garbage-collection process.}
 @sp 0.0
 @end iftex
 @end float
@@ -32247,7 +32249,7 @@ on the chip and the method by which it was designed.}
 @sp 0.3
 @center @image{fig/chap5/chip,91mm,,,.jpg}
 @sp 0.6
-@strong{Figure 5.16:} A silicon-chip implementation of an evaluator for Scheme.
+@caption{@strong{Figure 5.16:} A silicon-chip implementation of an evaluator for Scheme.}
 @sp 0.6
 @end iftex
 @end quotation
@@ -33509,19 +33511,19 @@ expression is accomplished by evaluating the component expressions.
 The simplest method for combining instruction sequences is a procedure called
 @code{append-instruction-sequences}.  It takes as arguments any number of
 instruction sequences that are to be executed sequentially; it appends them and
-returns the combined sequence.  That is, if @math{\langle}@math{seq_1}@math{\rangle} and @math{\langle}@math{seq_2}@math{\rangle} are
+returns the combined sequence.  That is, if @math{\langle}@var{seq}@math{_1\rangle} and @math{\langle}@var{seq}@math{_2\rangle} are
 sequences of instructions, then evaluating
 
 @lisp
-(append-instruction-sequences @math{\langle}@math{seq_1}@math{\rangle} @math{\langle}@math{seq_2}@math{\rangle})
+(append-instruction-sequences @math{\langle}@var{seq}@math{_{\mono{1}}\rangle} @math{\langle}@var{seq}@math{_{\mono{2}}\rangle})
 @end lisp
 
 @noindent
 produces the sequence
 
 @lisp
-@math{\langle}@math{seq_1}@math{\rangle}
-@math{\langle}@math{seq_2}@math{\rangle}
+@math{\langle}@var{seq}@math{_{\mono{1}}\rangle}
+@math{\langle}@var{seq}@math{_{\mono{2}}\rangle}
 @end lisp
 
 @noindent
@@ -33539,11 +33541,12 @@ Otherwise, @code{preserving} simply returns the appended instruction sequences.
 Thus, for example,
 
 @lisp
-(preserving (list @math{\langle reg_1 \rangle} @math{\langle reg_2 \rangle}) @math{\langle seg_1 \rangle} @math{\langle seg_2 \rangle})
+(preserving (list @math{\langle}@var{reg}@math{_{\mono{1}}\rangle} @math{\langle}@var{reg}@math{_{\mono{2}}\rangle}) @math{\langle}@var{seg}@math{_{\mono{1}}\rangle} @math{\langle}@var{seg}@math{_{\mono{2}}\rangle})
 @end lisp
 
+@noindent
 produces one of the following four sequences of instructions, depending on how
-@math{\langle}@math{seq_1}@math{\rangle} and @math{\langle}@math{seq_2}@math{\rangle} use @math{\langle}@math{reg_1}@math{\rangle} and @math{\langle}@math{reg_2}@math{\rangle}:
+@math{\langle}@var{seq}@math{_1\rangle} and @math{\langle}@var{seq}@math{_2\rangle} use @math{\langle}@var{reg}@math{_1\rangle} and @math{\langle}@var{reg}@math{_2\rangle}:
 @ifinfo
 
 @smallexample
@@ -33565,23 +33568,29 @@ $$\vbox{
 	\kern0.8em # \kern0.4em \hfil & \vrule
 	\kern0.8em # \kern0.4em \hfil \cr
 
-$\langle{seq_1}\rangle$ 			& \hbox{\tt (save} $\langle{reg_1}\rangle${\tt)} &
-\hbox{\tt (save} $\langle{reg_2}\rangle${\tt)} 	& \hbox{\tt (save} $\langle{reg_2}\rangle${\tt)} \cr
+  $\langle{\mathit{seq}_1}\rangle$
+& \hbox{\tt (save} $\langle{\mathit{reg}_1}\rangle${\tt)}
+& \hbox{\tt (save} $\langle{\mathit{reg}_2}\rangle${\tt)}
+& \hbox{\tt (save} $\langle{\mathit{reg}_2}\rangle${\tt)} \cr
 
-$\langle{seq_2}\rangle$ 			& $\langle{seq_1}\rangle$	&
-$\langle{seq_1}\rangle$ 			& \hbox{\tt (save} $\langle{reg_1}\rangle${\tt)} \cr
+  $\langle{\mathit{seq}_2}\rangle$
+& $\langle{\mathit{seq}_1}\rangle$
+& $\langle{\mathit{seq}_1}\rangle$
+& \hbox{\tt (save} $\langle{\mathit{reg}_1}\rangle${\tt)} \cr
 
-						& \hbox{\tt (restore} $\langle{reg_1}\rangle${\tt)} &
-\hbox{\tt (restore} $\langle{reg_2}\rangle${\tt)} 	& $\langle{seq_1}\rangle$ \cr
+& \hbox{\tt (restore} $\langle{\mathit{reg}_1}\rangle${\tt)}
+& \hbox{\tt (restore} $\langle{\mathit{reg}_2}\rangle${\tt)}
+& $\langle{\mathit{seq}_1}\rangle$ \cr
 
-						& $\langle{seq_2}\rangle$ &
-$\langle{seq_2}\rangle$				& \hbox{\tt (restore} $\langle{reg_1}\rangle${\tt)} \cr
+& $\langle{\mathit{seq}_2}\rangle$
+& $\langle{\mathit{seq}_2}\rangle$
+& \hbox{\tt (restore} $\langle{\mathit{reg}_1}\rangle${\tt)} \cr
 
-						&  &
-			      			& \hbox{\tt (restore} $\langle{reg_2}\rangle${\tt)} \cr
+&  &
+& \hbox{\tt (restore} $\langle{\mathit{reg}_2}\rangle${\tt)} \cr
 
-						&  &
-			      			& $\langle{seq_2}\rangle$ \cr
+&  &
+& $\langle{\mathit{seq}_2}\rangle$ \cr
 }
 }$$
 @end tex
@@ -35653,9 +35662,9 @@ tree-recursive Fibonacci procedure
 
 @noindent
 compared to the effectiveness of using the special-purpose Fibonacci machine of
-@ref{Figure 5.12}.  (For measurement of the inter- preted performance, see
+@ref{Figure 5.12}.  (For measurement of the interpreted performance, see
 @ref{Exercise 5.29}.)  For Fibonacci, the time resource used is not linear in
-@math{n;} hence the ratios of stack oper- ations will not approach a limiting value
+@math{n;} hence the ratios of stack operations will not approach a limiting value
 that is independent of @math{n}.
 @end quotation
 
@@ -35771,7 +35780,7 @@ allocation.  @cite{Information Processing Letters} 25(4): 275-279.
 \phantomsection @anchor{Backus 1978}
 @b{Backus}, John.  1978.  Can programming be liberated from the von Neumann style?
 @cite{Communications of the @acronym{ACM}} 21(8): 613-641.
-@url{http://www.stanford.edu/class/cs242/readings/backus.pdf, –›}
+@url{http://worrydream.com/refs/Backus-CanProgrammingBeLiberated.pdf, –›}
 
 \phantomsection @anchor{Baker (1978)}
 @b{Baker}, Henry G., Jr.  1978.  List processing in real time on a serial computer.
@@ -36171,7 +36180,7 @@ Technical report 295, @acronym{MIT} Laboratory for Computer Science.
 \phantomsection @anchor{Raymond 1993}
 @b{Raymond}, Eric.  1993. @cite{The New Hacker's Dictionary}. 2nd edition.
 Cambridge, @acronym{MA}: @acronym{MIT} Press.
-@url{http://www.outpost9.com/reference/jargon/jargon_toc.html, –›}
+@url{http://www.catb.org/jargon/, –›}
 
 @b{Raynal}, Michel. 1986. @cite{Algorithms for Mutual Exclusion}.  Cambridge, @acronym{MA}:
 @acronym{MIT} Press.
@@ -36348,8 +36357,8 @@ that it has been prepared with the help of a computer.
 \setindexprenote{\normalsize \begin{quote} Any inaccuracies in this index may be explained by the fact
 that it has been prepared with the help of a computer.
 
----Donald E. Knuth, @cite{Fundamental Algorithms}@*
-(Volume 1 of @cite{The Art of Computer Programming}) \end{quote}}
+---Donald E. Knuth, \textit{Fundamental Algorithms}\\
+(Volume 1 of \textit{The Art of Computer Programming}) \end{quote}}
 
 @printindex cp
 
